@@ -187,6 +187,9 @@
         friend.scores.push($('#question' + [i] + ' option:selected').text());  
     };
     console.log(friend);
+
+    $.post("/api/friends", friend);
+    console.log(success);
     });
 </script>
 
