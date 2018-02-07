@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
 	<title> Friend Finder Survey</title>
 </head>
@@ -175,21 +175,22 @@
 
 <script type="text/javascript">
     $("#submit").on("click", function(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    var friend = {
-        name: $('#name').val().trim(),
-        photo: $('#image').val().trim(),
-        scores: []
-    }
+        var friend = {
+            name: $('#name').val().trim(),
+            photo: $('#image').val().trim(),
+            scores: []
+        }
 
-    for (var i = 1; i < 11; i++) {
-        friend.scores.push($('#question' + [i] + ' option:selected').text());  
-    };
-    console.log(friend);
+        for (var i = 1; i < 11; i++) {
+            var value = $('#question' + [i] + ' option:selected').val()
+            friend.scores.push(parseInt(value));  
+        };
 
-    $.post("/api/friends", friend);
-    console.log(success);
+        $.post("/api/friends", friend, function(data){
+            console.log("success");
+        });
     });
 </script>
 
