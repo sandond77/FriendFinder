@@ -216,7 +216,7 @@
 
         $.post("/api/friends", friend, function(data){
         $('#matchName').html("<h4>" + data.name + "</h4>");
-        $('#matchPhoto').html("<img src=" + data.photo + "alt='Match Photo' height='200' width='200' class='img-fluid'>");
+        $('#matchPhoto').html("<img src=" + data.photo + " alt='Match Photo' height='200' width='200' class='img-fluid'>");
         $('#myModal').modal('toggle')
         console.log(data)
         });
