@@ -6,11 +6,11 @@
 
 <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
 
-<link rel="stylesheet" type="text/css" href="css/reset.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/reset.css">
 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css"> -->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<title> Friend Finder Survey</title>
 </head>
@@ -163,6 +163,26 @@
         <hr class="my-4">
 
         <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center" id="exampleModalLabel">Your Match</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p id="matchName"></p>
+                        <p id="matchPhoto"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -172,6 +192,9 @@
   src="https://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
     $("#submit").on("click", function(event) {
@@ -189,7 +212,10 @@
         };
 
         $.post("/api/friends", friend, function(data){
-            console.log("success");
+        $('#matchName').html("<h4>" + data.name + "</h4>");
+        $('#matchPhoto').html("<img src=" + data.photo + "alt='Match Photo' height='200' width='200' class='img-fluid'>");
+        $('#myModal').modal('toggle')
+        console.log(data)
         });
     });
 </script>

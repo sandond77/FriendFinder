@@ -7,7 +7,6 @@ module.exports = function(app) {
 
 	app.post("/api/friends", function(req, res) {
       	friendsData.push(req.body);
-      	res.json(true);
 
       	var totalDifference;
       	var matchScore;
@@ -22,9 +21,15 @@ module.exports = function(app) {
     		if (matchScore < totalDifference && req.body.name !== friendsData[i].name) {
     			matchScore = totalDifference;
     			matchName = friendsData[i].name;
+    			matchImage = friendsData[i].photo;
     		}
     	}
+    	
+    	var match = {
+    		name: matchName,
+    		photo: matchImage
+    	}
 
-    	console.log("match", matchName)
+      	res.json(match);
   });
 }
